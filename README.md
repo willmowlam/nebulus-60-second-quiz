@@ -1,1 +1,1 @@
-# nebulus-60-second-quiz
+# 60 Second Quiz
