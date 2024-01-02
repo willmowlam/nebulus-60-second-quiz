@@ -32,3 +32,23 @@
   // User is taken to the high scores page
   // High scores are listed, sorted highest to lowest
   // User has option to take the quiz again
+
+// Amount of time to answer all questions
+const quizTime = 60;
+
+// Time removed for an incorrect answer
+const incorrectPenalty = 10;
+
+// Objects for page elements
+const timer = document.getElementById("time");
+const startScreen = document.getElementById("start-screen");
+const buttonStart = document.getElementById("start");
+const questions = document.getElementById("questions");
+const questionTitle = document.getElementById("questionTitle");
+const questionChoices = document.getElementById("choices");
+const endScreen = document.getElementById("end-screen");
+const finalScore = document.getElementById("final-score");
+const initials = document.getElementById("initials");
+const buttonSubmitInitials = document.getElementById("submit");
+const feedback = document.getElementById("feedback");
+
