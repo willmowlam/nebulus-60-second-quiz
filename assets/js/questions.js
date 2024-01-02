@@ -4,7 +4,7 @@ const questions = [
     choices: ["strings", "booleans", "alerts", "numbers"],
     answer: "alerts"
   },
- /* {
+  {
     title: "The condition in an if / else statement is enclosed within ____.",
     choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
     answer: "parentheses"
@@ -38,7 +38,7 @@ const questions = [
     title: "What does the JavaScript `===` operator check for?",
     choices: ["Assignment", "Inequality", "Equality in value", "Equality in value and type"],
     answer: "Equality in value and type"
-  },*/
+  },
   {
     title: "Which of the following is NOT a valid way to comment in JavaScript?",
     choices: ["# This is a comment", "// This is a comment", "/* This is a comment */"],
