@@ -43,12 +43,32 @@ const incorrectPenalty = 10;
 const timer = document.getElementById("time");
 const startScreen = document.getElementById("start-screen");
 const buttonStart = document.getElementById("start");
-const questions = document.getElementById("questions");
+const questionScreen = document.getElementById("questions");
 const questionTitle = document.getElementById("questionTitle");
 const questionChoices = document.getElementById("choices");
 const endScreen = document.getElementById("end-screen");
 const finalScore = document.getElementById("final-score");
 const initials = document.getElementById("initials");
 const buttonSubmitInitials = document.getElementById("submit");
-const feedback = document.getElementById("feedback");
+const feedbackScreen = document.getElementById("feedback");
 
+// Start button
+buttonStart.addEventListener("click", function(event) {
+
+  addClass(startScreen, "hide");
+  removeClass(questionScreen, "hide");
+  
+});
+
+// Add a class to an element
+function addClass(element, className) {
+  if (!element.classList.contains(className)) {
+    element.classList.add(className);
+  }
+}
+// Remove a class from an element
+function removeClass(element, className) {
+  if (element.classList.contains(className)) {
+    element.classList.remove(className);
+  }
+}
