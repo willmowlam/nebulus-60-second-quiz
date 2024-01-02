@@ -9,12 +9,18 @@ buttonClearScores.addEventListener("click", function(event) {
 });
 
 function displayHighScores(){
+
+  // Clear scores
+  listHighScores.innerHTML = '';
   
   // Set high scores or empty array if none exist yet
   let highScores = JSON.parse(localStorage.getItem('highScores')) || [];
 
+  // Reorder array by descending score
+  highScores.sort((a, b) => b.score - a.score);
+
   for (let i = 0; i < highScores.length; i++) {
-    const score = highScores[i];
+    // const score = highScores[i];
     const li = document.createElement("li");
     li.textContent = highScores[i].initials + " - " + highScores[i].score;
     listHighScores.appendChild(li);
