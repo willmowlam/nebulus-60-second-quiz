@@ -7,11 +7,14 @@ const incorrectPenalty = 10;
 // Time added for correct answer
 const correctBonus = 5;
 
-// Timer object
+// Quiz timer
 let timer;
 
 // Time left in quiz
 let timeLeft;
+
+// Feedback timer
+let feedbackTimer;
 
 // Objects for page elements
 const timerText = document.getElementById("time");
@@ -186,7 +189,10 @@ function answerQuestion(answer){
 
   removeClass(feedbackScreen, "hide");
 
-  let feedbackTimer = setInterval(function () {
+  // Clear the feedbackTimer
+  clearInterval(feedbackTimer);
+
+  feedbackTimer = setInterval(function () {
     addClass(feedbackScreen, "hide");
   }, 5000);
 
@@ -198,8 +204,5 @@ function answerQuestion(answer){
 // End of the quiz
 function stopQuiz(){
   addClass(questionScreen, "hide");
-  let feedbackTimer = setInterval(function () {
-    addClass(feedbackScreen, "hide");
-  }, 5000);
   removeClass(endScreen, "hide");
 };
