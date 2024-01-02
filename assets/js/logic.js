@@ -100,7 +100,7 @@ function startQuiz(){
     // So long as there is time left in the quiz
     if (timeLeft > 0 && question < questions.length) {
       timerText.textContent = timeLeft;
-      displayQuestion(question);
+      //displayQuestion(question);
     } else if (timeLeft === 0) {
       timerText.textContent = 0;
       finalScore.textContent = 0;
@@ -116,6 +116,8 @@ function startQuiz(){
 
   }, 1000);
 
+  displayQuestion(question);
+
 };
 
 // Display a specific question
@@ -129,6 +131,7 @@ function displayQuestion(q) {
     for (let i = 0; i < questions[q].choices.length; i++) {
       const button = document.createElement("button");
       button.textContent = i + 1 + ". " + questions[q].choices[i];
+      button.setAttribute("data-answer", questions[q].choices[i]);
       questionChoices.appendChild(button);
     }
     // Save question to prevent re-rendering
@@ -137,6 +140,17 @@ function displayQuestion(q) {
   }
 
 };
+
+// Listen to choice buttons
+questionChoices.addEventListener("click", function(event) {
+  const element = event.target;
+
+  // If that element is a button...
+  if (element.matches("button") === true) {
+    console.log(element.getAttribute("data-answer"));
+  }
+
+});
 
 // End of the quiz
 function stopQuiz(){
