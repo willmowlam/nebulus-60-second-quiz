@@ -34,10 +34,13 @@
   // User has option to take the quiz again
 
 // Amount of time to answer all questions
-const quizTime = 100;
+const quizTime = 60;
 
 // Time removed for an incorrect answer
 const incorrectPenalty = 10;
+
+// Time added for correct answer
+const correctBonus = 5;
 
 // Timer object
 let timer;
@@ -92,19 +95,21 @@ function startQuiz(){
   timeLeft = quizTime;
   timerText.textContent = timeLeft;
 
+  // Display first question
+  displayQuestion(0);
+
   // Start timer
-  timer = setInterval(function () {   
+  timer = setInterval(function () {
 
     // So long as there is time left in the quiz
-    if (timeLeft > 0 && question < questions.length) {
+    if (timeLeft > 0 && question <= questions.length) {
       timerText.textContent = timeLeft;
-      //displayQuestion(question);
     } else if (timeLeft === 0) {
       timerText.textContent = 0;
       finalScore.textContent = 0;
       clearInterval(timer);
       stopQuiz();
-     } else {
+    } else {
       finalScore.textContent = timerText.textContent;
       clearInterval(timer);
       stopQuiz();
@@ -114,12 +119,12 @@ function startQuiz(){
 
   }, 1000);
 
-  displayQuestion(question);
-
 };
 
 // Display a specific question
 function displayQuestion(q) {  
+
+  if (q < questions.length) {
 
     // Set question
     questionTitle.innerText = questions[q].title;
@@ -136,6 +141,13 @@ function displayQuestion(q) {
     }
 
     question++;
+
+  } else {
+    // No more questions available!
+    finalScore.textContent = timerText.textContent;
+    clearInterval(timer);
+    stopQuiz();
+  }
 
 };
 
@@ -157,16 +169,27 @@ function answerQuestion(answer){
      one at the end of displayQuestion() */
   const q = question - 1;
 
-  console.log(questions[q].title);
-  console.log(answer);
-
-  if (answer === questions[q].answer){
+  if (answer === questions[q].answer) {
     // Correct
-    console.log("Correct");
-  }else{
+     feedbackScreen.innerText = "Correct!";
+
+    // Add time
+    timeLeft = timeLeft + correctBonus;
+    timerText.textContent = timeLeft;
+  } else {
     // Incorrect
-    console.log("Incorrect");
+    feedbackScreen.innerText = "Incorrect!";
+
+    // Remove time
+    timeLeft = timeLeft - incorrectPenalty;
+    timerText.textContent = timeLeft;
   }
+
+  removeClass(feedbackScreen, "hide");
+
+  let feedbackTimer = setInterval(function () {
+    addClass(feedbackScreen, "hide");
+  }, 5000);
 
   // Display next question
   displayQuestion(question);
@@ -176,6 +199,8 @@ function answerQuestion(answer){
 // End of the quiz
 function stopQuiz(){
   addClass(questionScreen, "hide");
-  addClass(feedbackScreen, "hide");
+  let feedbackTimer = setInterval(function () {
+    addClass(feedbackScreen, "hide");
+  }, 5000);
   removeClass(endScreen, "hide");
 };
