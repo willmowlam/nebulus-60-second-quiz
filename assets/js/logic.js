@@ -1,37 +1,37 @@
 // Set of questions --> array of objects
 // Each question needs the following:
-  // Question text
-  // Set of answers
-  // Which answer is correct
+  // !Question text
+  // !Set of answers
+  // !Which answer is correct
 
 // Landing page:
-  // Explanation of the quiz
-  // Start button
+  // !Explanation of the quiz
+  // !Start button
 
 // Click the start button:
-  // Landing page goes away
-  // Timer starts
-  // The first question appears (with its answers)
+  // !Landing page goes away
+  // !Timer starts
+  // !The first question appears (with its answers)
 
 // For each question:
-  // User clicks an answer
-  // Their choice is compared to the correct answer as stored in the question's object
-  // If correct, tell them
-  // If incorrect, tell them AND subtract time from the timer
+  // !User clicks an answer
+  // !Their choice is compared to the correct answer as stored in the question's object
+  // !If correct, tell them
+  // !If incorrect, tell them AND subtract time from the timer
   // Optional: play a sound for correct or incorrect
-  // Either way, the question disappears after a few seconds and the next question appears
+  // !Either way, the question disappears after a few seconds and the next question appears
 
 // After the last question:
-  // Timer stops
-  // Question disappears
-  // Form appears for user to enter their initials
-  // Display their score
+  // !Timer stops
+  // !Question disappears
+  // !Form appears for user to enter their initials
+  // !Display their score
 
 // User submits form
-  // Initials and score get stored in local storage
-  // User is taken to the high scores page
-  // High scores are listed, sorted highest to lowest
-  // User has option to take the quiz again
+  // !Initials and score get stored in local storage
+  // !User is taken to the high scores page
+  // !High scores are listed, sorted highest to lowest
+  // !User has option to take the quiz again
 
 // Amount of time to answer all questions
 const quizTime = 60;
@@ -60,6 +60,14 @@ const finalScore = document.getElementById("final-score");
 const initials = document.getElementById("initials");
 const buttonSubmitInitials = document.getElementById("submit");
 const feedbackScreen = document.getElementById("feedback");
+
+// Audio
+const audioCorrect = new Audio();
+const audioIncorrect = new Audio();
+audioCorrect.src = './assets/sfx/correct.wav';
+audioIncorrect.src = './assets/sfx/incorrect.wav';
+audioCorrect.type = 'audio/wav';
+audioIncorrect.type = 'audio/wav';
 
 // Start button
 buttonStart.addEventListener("click", function(event) {
@@ -191,7 +199,10 @@ function answerQuestion(answer){
 
   if (answer === questions[q].answer) {
     // Correct
-     feedbackScreen.innerText = "Correct!";
+    feedbackScreen.innerText = "Correct!";
+
+    // Play audio file
+    audioCorrect.play();
 
     // Add time
     timeLeft = timeLeft + correctBonus;
@@ -199,6 +210,9 @@ function answerQuestion(answer){
   } else {
     // Incorrect
     feedbackScreen.innerText = "Incorrect!";
+
+    // Play audio file
+    audioIncorrect.play();
 
     // Remove time
     timeLeft = timeLeft - incorrectPenalty;
