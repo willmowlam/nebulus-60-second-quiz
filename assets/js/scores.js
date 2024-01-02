@@ -20,7 +20,6 @@ function displayHighScores(){
   highScores.sort((a, b) => b.score - a.score);
 
   for (let i = 0; i < highScores.length; i++) {
-    // const score = highScores[i];
     const li = document.createElement("li");
     li.textContent = highScores[i].initials + " - " + highScores[i].score;
     listHighScores.appendChild(li);
