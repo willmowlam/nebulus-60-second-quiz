@@ -30,23 +30,23 @@ const questions = [
     answer: "22"
   },
   {
-    title: "Which of the following is a correct way to declare a JavaScript variable?",
+    title: "Which of the following is NOT a correct way to declare a JavaScript variable?",
     choices: ["let variableName;", "variable variableName;", "var variableName;", "const variableName;"],
-    answer: "var variableName;"
+    answer: "variable variableName;"
   },
   {
     title: "What does the JavaScript `===` operator check for?",
-    choices: ["Equality in value and type", "Equality in value only", "Assignment", "Inequality"],
+    choices: ["Assignment", "Inequality", "Equality in value", "Equality in value and type"],
     answer: "Equality in value and type"
   },
   {
     title: "Which of the following is NOT a valid way to comment in JavaScript?",
-    choices: ["// This is a comment", "/* This is a comment */", "# This is a comment", "<!-- This is a comment -->"],
+    choices: ["# This is a comment", "// This is a comment", "/* This is a comment */"],
     answer: "# This is a comment"
   },
   {
     title: "What does the JavaScript `setTimeout` function do?",
-    choices: ["Runs a function after a specified delay", "Halts the execution of the script", "Sets the value of a variable", "Returns the current date and time"],
+    choices: ["Sets the value of a variable", "Sets the current date and time", "Runs a function after a specified delay", "Halts the execution of the script"],
     answer: "Runs a function after a specified delay"
   },
 ]
