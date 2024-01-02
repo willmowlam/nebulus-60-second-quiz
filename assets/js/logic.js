@@ -162,6 +162,26 @@ questionChoices.addEventListener("click", function(event) {
 
 });
 
+// Submit initials to High Score
+buttonSubmitInitials.addEventListener("click", function(event) {
+
+  const initialsText = initials.value.trim();
+
+  // Set high scores or empty array if none exist yet
+  let highScores = JSON.parse(localStorage.getItem('highScores')) || [];
+
+  if (initialsText.length === 0){
+    alert("Please enter your initials.");
+  } else {
+    // Save score to localstorage
+    const score = { initials: initialsText, score: finalScore.textContent };
+    highScores.push(score);
+    localStorage.setItem("highScores", JSON.stringify(highScores));
+    window.location = "./highscores.html";
+  }
+  
+});
+
 // Handle answers
 function answerQuestion(answer){
 
