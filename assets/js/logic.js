@@ -34,13 +34,19 @@
   // User has option to take the quiz again
 
 // Amount of time to answer all questions
-const quizTime = 60;
+const quizTime = 6;
 
 // Time removed for an incorrect answer
 const incorrectPenalty = 10;
 
+// Timer object
+let timer;
+
+// Time left in quiz
+let timeLeft;
+
 // Objects for page elements
-const timer = document.getElementById("time");
+const timerText = document.getElementById("time");
 const startScreen = document.getElementById("start-screen");
 const buttonStart = document.getElementById("start");
 const questionScreen = document.getElementById("questions");
@@ -57,7 +63,10 @@ buttonStart.addEventListener("click", function(event) {
 
   addClass(startScreen, "hide");
   removeClass(questionScreen, "hide");
-  
+
+  // start the quiz
+  startQuiz();
+
 });
 
 // Add a class to an element
@@ -72,3 +81,32 @@ function removeClass(element, className) {
     element.classList.remove(className);
   }
 }
+
+// Beginning of the quiz
+function startQuiz(){
+
+  timeLeft = quizTime;
+
+  // Start timer
+  timer = setInterval(function () {   
+
+    // So long as there is time left in the quiz
+    if (timeLeft > 0){
+      timerText.textContent = timeLeft;
+    } else {
+      timerText.textContent = 0;
+      stopQuiz();
+    }
+
+    timeLeft--;
+
+  }, 1000);
+
+};
+
+// End of the quiz
+function stopQuiz(){
+  addClass(questionScreen, "hide");
+  addClass(feedbackScreen, "hide");
+  removeClass(endScreen, "hide");
+};
