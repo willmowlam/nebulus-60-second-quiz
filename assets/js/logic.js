@@ -34,7 +34,7 @@
   // User has option to take the quiz again
 
 // Amount of time to answer all questions
-const quizTime = 6;
+const quizTime = 11;
 
 // Time removed for an incorrect answer
 const incorrectPenalty = 10;
@@ -50,7 +50,7 @@ const timerText = document.getElementById("time");
 const startScreen = document.getElementById("start-screen");
 const buttonStart = document.getElementById("start");
 const questionScreen = document.getElementById("questions");
-const questionTitle = document.getElementById("questionTitle");
+const questionTitle = document.getElementById("question-title");
 const questionChoices = document.getElementById("choices");
 const endScreen = document.getElementById("end-screen");
 const finalScore = document.getElementById("final-score");
@@ -82,25 +82,59 @@ function removeClass(element, className) {
   }
 }
 
+// Track current question
+let question = 0;
+
+// Track array of asked questions
+let askedQuestions = [];
+
 // Beginning of the quiz
 function startQuiz(){
 
+  // Set time left
   timeLeft = quizTime;
 
   // Start timer
   timer = setInterval(function () {   
 
     // So long as there is time left in the quiz
-    if (timeLeft > 0){
+    if (timeLeft > 0 && question < questions.length) {
       timerText.textContent = timeLeft;
-    } else {
+      displayQuestion(question);
+    } else if (timeLeft === 0) {
       timerText.textContent = 0;
+      finalScore.textContent = 0;
+      clearInterval(timer);
+      stopQuiz();
+     } else {
+      finalScore.textContent = timerText.textContent;
+      clearInterval(timer);
       stopQuiz();
     }
 
     timeLeft--;
 
   }, 1000);
+
+};
+
+// Display a specific question
+function displayQuestion(q) {  
+
+  // Only render question if not already asked
+  if (!askedQuestions.includes(q - 1)) {
+    questionTitle.innerText = questions[q].title;
+    
+    // Display choice buttons
+    for (let i = 0; i < questions[q].choices.length; i++) {
+      const button = document.createElement("button");
+      button.textContent = i + 1 + ". " + questions[q].choices[i];
+      questionChoices.appendChild(button);
+    }
+    // Save question to prevent re-rendering
+    askedQuestions.push(q);
+    question++;
+  }
 
 };
 
