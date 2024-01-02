@@ -34,7 +34,7 @@
   // User has option to take the quiz again
 
 // Amount of time to answer all questions
-const quizTime = 11;
+const quizTime = 100;
 
 // Time removed for an incorrect answer
 const incorrectPenalty = 10;
@@ -85,14 +85,12 @@ function removeClass(element, className) {
 // Track current question
 let question = 0;
 
-// Track array of asked questions
-let askedQuestions = [];
-
 // Beginning of the quiz
 function startQuiz(){
 
   // Set time left
   timeLeft = quizTime;
+  timerText.textContent = timeLeft;
 
   // Start timer
   timer = setInterval(function () {   
@@ -123,9 +121,11 @@ function startQuiz(){
 // Display a specific question
 function displayQuestion(q) {  
 
-  // Only render question if not already asked
-  if (!askedQuestions.includes(q - 1)) {
+    // Set question
     questionTitle.innerText = questions[q].title;
+
+    // Clear any choice buttons
+    questionChoices.innerHTML = "";
     
     // Display choice buttons
     for (let i = 0; i < questions[q].choices.length; i++) {
@@ -134,10 +134,8 @@ function displayQuestion(q) {
       button.setAttribute("data-answer", questions[q].choices[i]);
       questionChoices.appendChild(button);
     }
-    // Save question to prevent re-rendering
-    askedQuestions.push(q);
+
     question++;
-  }
 
 };
 
@@ -147,10 +145,33 @@ questionChoices.addEventListener("click", function(event) {
 
   // If that element is a button...
   if (element.matches("button") === true) {
-    console.log(element.getAttribute("data-answer"));
+    answerQuestion(element.getAttribute("data-answer"));
   }
 
 });
+
+// Handle answers
+function answerQuestion(answer){
+
+  /* Decrement by one as the question index is always incremented by 
+     one at the end of displayQuestion() */
+  const q = question - 1;
+
+  console.log(questions[q].title);
+  console.log(answer);
+
+  if (answer === questions[q].answer){
+    // Correct
+    console.log("Correct");
+  }else{
+    // Incorrect
+    console.log("Incorrect");
+  }
+
+  // Display next question
+  displayQuestion(question);
+
+};
 
 // End of the quiz
 function stopQuiz(){
