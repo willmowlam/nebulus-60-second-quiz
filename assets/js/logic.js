@@ -184,7 +184,12 @@ function answerQuestion(answer){
 
     // Remove time
     timeLeft = timeLeft - incorrectPenalty;
-    timerText.textContent = timeLeft;
+    if (timeLeft > 0){
+      timerText.textContent = timeLeft;
+    } else {
+      // Don't show negative time
+      timerText.textContent = 0;
+    }
   }
 
   removeClass(feedbackScreen, "hide");
