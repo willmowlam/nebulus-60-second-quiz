@@ -80,7 +80,7 @@ function startQuiz(){
     // So long as there is time left in the quiz
     if (timeLeft > 0 && question <= questions.length) {
       timerText.textContent = timeLeft;
-    } else if (timeLeft === 0) {
+    } else if (timeLeft <= 0) {
       timerText.textContent = 0;
       finalScore.textContent = 0;
       clearInterval(timer);
